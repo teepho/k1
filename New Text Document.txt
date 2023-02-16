@@ -1,0 +1,2 @@
+https://www.esegece.com:2053/sse
+https://www.piesocket.com/websocket-tester

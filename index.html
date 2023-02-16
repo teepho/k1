@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websocket client demo</title>
+</head>
+<body>
+
+    <button onclick="sendText()">Send text</button>
+
+    <button onclick="sendBinary()">Send binary</button>
+
+    <script>
+        const url = 'ws://127.0.0.1:8080'
+        const connection = new WebSocket(url)
+
+        connection.onopen = () => {
+            console.log('Connected.');
+        }
+
+        connection.onerror = (error) => {
+            console.log(`WebSocket error: ${error}`);
+        }
+
+        connection.onmessage = (e) => {
+            console.log(e.data);
+        }
+
+        function sendText() {
+            connection.send("Sample text")
+        }
+
+        function sendBinary() {
+            var samepleBytes = new Uint8Array(5);
+            samepleBytes[0] = 1;
+            samepleBytes[1] = 2;
+            samepleBytes[2] = 3;
+            samepleBytes[3] = 0x0A;
+            samepleBytes[4] = 0x0B;
+            connection.send(samepleBytes)
+        }
+
+    </script>
+</body>
+</html>
